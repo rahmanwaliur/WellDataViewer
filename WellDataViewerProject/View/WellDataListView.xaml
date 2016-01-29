@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="WellDataViewerProject.View.WellDataListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="700">
+
+    <UserControl.Resources>
+        <!-- DataGrid -->
+        <Style x:Key="{x:Type DataGrid}"
+           TargetType="{x:Type DataGrid}">
+            <Setter Property="BorderThickness"
+                Value="5" />
+            <Setter Property="HeadersVisibility"
+                Value="Column" />
+         </Style>
+
+        <!-- Row -->
+        <Style x:Key="{x:Type DataGridRow}"
+           TargetType="{x:Type DataGridRow}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding WellStatus}" Value="ShutIn">
+                    <Setter Property="Background"
+                        Value="LightGray" />
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Black" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <Trigger Property="IsMouseOver"
+                     Value="true">
+                    <Setter Property="Background"
+                        Value="LightCoral" />
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="White" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsSelected"
+                     Value="True">
+                    <Setter Property="Background"
+                        Value="Brown" />
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="White" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+           </Style.Triggers>
+        </Style>
+        
+    </UserControl.Resources>
+
+    <StackPanel>
+        <StackPanel.Resources>
+            <DataTemplate x:Key="WellStatusTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding WellStatus}"  />
+                    <!--<Image x:Name="closeIcon" Height="10" Source="/Images/close.png" />-->
+                    <Image x:Name="closeIcon" Height="10" Source="{Binding WellStatus}" />
+                    <Image x:Name="openIcon" Height="10" Source="{Binding WellStatus}" />
+                </StackPanel>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding Path=WellStatus}" Value="ShutIn">
+                        <Setter TargetName="closeIcon" Property="Source" Value="/Images/close.png" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=WellStatus}" Value="Open">
+                        <Setter TargetName="openIcon" Property="Source" Value="/Images/open.png" />
+                    </DataTrigger>
+                    
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </StackPanel.Resources>
+        <DockPanel LastChildFill="True" Width="470" Margin="20">
+            <TextBox Width="350" IsReadOnly="True" Margin="2" DockPanel.Dock="Left" Text="{Binding Path=WellDataPath}"/>
+            <Button Width="50" Content="Clear" Margin="1" DockPanel.Dock="Right"  />
+            <Button Width="50" Content="Browse" Margin="1" DockPanel.Dock="Right" Command="{Binding BrowseCommand}" />
+        </DockPanel>
+
+        
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding AllWellData}" Name="wellDataGrid" CanUserAddRows="False" CanUserResizeColumns="False" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="450" Width="640" >
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Record Date" Binding="{Binding RecordDate}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Well Name" Binding="{Binding WellName}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Oil Produced (bbl/day)" Binding="{Binding OilProduced}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Gas Produced (bbl/day)" Binding="{Binding GasProduced}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Water Produced (bbl/day)" Binding="{Binding WaterProduced}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="Well Status" CellTemplate="{StaticResource WellStatusTemplate}">
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+    
+</UserControl>
