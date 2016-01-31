@@ -59,9 +59,8 @@
             <DataTemplate x:Key="WellStatusTemplate">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding WellStatus}"  />
-                    <!--<Image x:Name="closeIcon" Height="10" Source="/Images/close.png" />-->
-                    <Image x:Name="closeIcon" Height="10" Source="{Binding WellStatus}" />
-                    <Image x:Name="openIcon" Height="10" Source="{Binding WellStatus}" />
+                    <Image x:Name="closeIcon" Height="10"  />
+                    <Image x:Name="openIcon" Height="10"  />
                 </StackPanel>
                 <DataTemplate.Triggers>
                     <DataTrigger Binding="{Binding Path=WellStatus}" Value="ShutIn">
@@ -73,6 +72,7 @@
                     
                 </DataTemplate.Triggers>
             </DataTemplate>
+            
         </StackPanel.Resources>
         <DockPanel LastChildFill="True" Width="470" Margin="20">
             <TextBox Width="350" IsReadOnly="True" Margin="2" DockPanel.Dock="Left" Text="{Binding Path=WellDataPath}"/>
@@ -105,6 +105,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
+
                 <DataGridTextColumn Header="Gas Produced (bbl/day)" Binding="{Binding GasProduced}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">

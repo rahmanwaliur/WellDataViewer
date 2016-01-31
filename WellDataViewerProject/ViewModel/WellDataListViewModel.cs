@@ -122,6 +122,8 @@ namespace WellDataViewerProject.ViewModel
                     if (row.OilProduced != 0)
                         OilProducedShutIn = false;
                 }
+                if (row.OilProduced < 0)
+                    ProductionError = true;
             }
         }
             
