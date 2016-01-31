@@ -78,6 +78,20 @@ namespace WellDataViewerProject.ViewModel
             }
         }
 
+        private bool _productionError;
+        public bool ProductionError
+        {
+            get
+            {
+                return _productionError;
+            }
+            set
+            {
+                _productionError = value;
+                OnPropertyChanged("ProductionError");
+            }
+        }
+
        
         public ICommand BrowseCommand
         {
@@ -108,8 +122,6 @@ namespace WellDataViewerProject.ViewModel
                     if (row.OilProduced != 0)
                         OilProducedShutIn = false;
                 }
-                
-                
             }
         }
             

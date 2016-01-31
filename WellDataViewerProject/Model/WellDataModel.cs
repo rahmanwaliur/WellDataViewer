@@ -34,8 +34,8 @@ namespace WellDataViewerProject.Model
         private int waterProduced;
         public int WaterProduced
         {
-            get { return gasProduced; }
-            set { gasProduced = value; }
+            get { return waterProduced; }
+            set { waterProduced = value; }
         }
 
         private string wellStatus;
