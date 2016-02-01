@@ -51,7 +51,7 @@
                 </Trigger>
            </Style.Triggers>
         </Style>
-        
+
     </UserControl.Resources>
 
     <StackPanel>
@@ -111,6 +111,7 @@
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="TextAlignment" Value="Center" />
                         </Style>
+                        
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Water Produced (bbl/day)" Binding="{Binding WaterProduced}">

@@ -50,49 +50,7 @@ namespace WellDataViewerProject.ViewModel
             }
         }
 
-        private bool _wellStatus;
-        public bool WellStatus
-        {
-            get
-            {
-                return _wellStatus;
-            }
-            set
-            {
-                _wellStatus = value;
-                OnPropertyChanged("WellStatus");
-            }
-        }
-
-        private bool _oilProducedShutIn;
-        public bool OilProducedShutIn
-        {
-            get
-            {
-                return _oilProducedShutIn;
-            }
-            set
-            {
-                _oilProducedShutIn = value;
-                OnPropertyChanged("OilProducedShutIn");
-            }
-        }
-
-        private bool _productionError;
-        public bool ProductionError
-        {
-            get
-            {
-                return _productionError;
-            }
-            set
-            {
-                _productionError = value;
-                OnPropertyChanged("ProductionError");
-            }
-        }
-
-       
+        
         public ICommand BrowseCommand
         {
             get 
@@ -114,17 +72,7 @@ namespace WellDataViewerProject.ViewModel
 
             WellDataPath = AllWellData.ElementAt(0).FilePath;
 
-            foreach (var row in AllWellData)
-            {
-                if (row.WellStatus == "ShutIn")
-                {
-                    WellStatus = true;
-                    if (row.OilProduced != 0)
-                        OilProducedShutIn = false;
-                }
-                if (row.OilProduced < 0)
-                    ProductionError = true;
-            }
+          
         }
             
         bool BrowseCommandCanExecute
